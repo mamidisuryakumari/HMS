@@ -1,0 +1,78 @@
+<extentreports>
+    <!-- Report Configuration -->
+    <configuration>
+        <!-- Theme options: standard (default), dark -->
+        <theme>standard</theme>
+
+        <!-- Encoding type, default is UTF-8 -->
+        <encoding>UTF-8</encoding>
+
+        <!-- Document title displayed in the browser tab -->
+        <documentTitle>Automation Test Report</documentTitle>
+        <thumbnailForBase64>true</thumbnailForBase64>
+
+        <!-- Report name displayed in the report -->
+        <reportName>Automation Test Execution Report</reportName>
+
+        <!-- Time stamp format for logs, steps, etc. -->
+        <timeStampFormat>yyyy-MM-dd HH:mm:ss</timeStampFormat>
+
+        <!-- Additional Settings -->
+        <protocol>HTTPS</protocol>
+        <projectName>Selenium Cucumber Automation Project</projectName>
+
+        <!-- Display total number of test cases executed -->
+        <displayTotalTests>true</displayTotalTests>
+
+        <!-- Display tags (like @Regression, @Smoke, etc.) in the report -->
+        <displayTags>true</displayTags>
+
+        <!-- Chart settings -->
+        <charts>
+            <!-- Enable or disable charts, default is true -->
+            <enable>true</enable>
+
+            <!-- Pie chart settings -->
+            <pieChart>
+                <visible>true</visible>
+            </pieChart>
+
+            <!-- Bar chart settings for total passed, failed, skipped tests -->
+            <barChart>
+                <visible>true</visible>
+            </barChart>
+        </charts>
+
+        <!-- Additional display settings for test execution summary -->
+        <testSummary>
+            <displayTotal>true</displayTotal>
+            <displayPassed>true</displayPassed>
+            <displayFailed>true</displayFailed>
+            <displaySkipped>true</displaySkipped>
+        </testSummary>
+    </configuration>
+
+    <!-- Custom CSS Styling -->
+    <customStyles>
+        <!-- Custom CSS code to style the report -->
+        <css><![CDATA[
+            .test-name {
+            font-size: 18px;
+            color: #00bcd4;
+            }
+            .step-details {
+            font-family: 'Courier New', Courier, monospace;
+            }
+            ]]></css>
+    </customStyles>
+
+    <!-- Custom JavaScript -->
+    <customScripts>
+        <!-- Custom JavaScript code to modify behavior -->
+        <js><![CDATA[
+            document.addEventListener("DOMContentLoaded", function() {
+            console.log('Custom script loaded');
+            });
+            ]]></js>
+    </customScripts>
+</extentreports>
