@@ -1,4 +1,4 @@
-Feature : Add doctor functionality
+Feature: Add doctor functionality
 
   @AddDoctor
   Scenario: Verify that the admin can successfully add a new doctor
@@ -15,12 +15,13 @@ Feature : Add doctor functionality
     Then I should see the admin add doctor page
     When I enter the following doctor details
       | Doctor Specialization   | Dermatology              |
-      | Doctor Name             | M Kumar                  |
+      | Doctor Name             | M Kumar${random}         |
       | Doctor Clinic Address   | Near manikonda,Hyderabad |
       | Doctor Consultancy Fees | 300                      |
       | Doctor Contact no       | 9963512385               |
-      | Doctor Email            | kumar@gmail.com          |
+      | Doctor Email            | kumar${random}@gmail.com |
       | Password                | kumar@123                |
       | Confirm Password        | kumar@123                |
     Then I should see a doctor add success message as Doctor info added Successfully
-    
+    When I login with doctor emailId and password
+    Then I should be navigated to the doctor dashboard page

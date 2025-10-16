@@ -13,7 +13,7 @@ import org.junit.platform.suite.api.Suite;
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
-@IncludeTags("PatientLogin")
+@IncludeTags("AddDoctor")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME,
         value = "pretty,html:target/cucumber-reports/reports.html, " +
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:")

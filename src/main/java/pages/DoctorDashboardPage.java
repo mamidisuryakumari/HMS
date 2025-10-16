@@ -8,6 +8,7 @@ public class DoctorDashboardPage extends BasePage {
     private TestContext context;
     public DoctorDashboardPage(TestContext context) {
         super(context);
+        this.context = context;
     }
 
     public String getDoctorDashBoardPageTitle(){
