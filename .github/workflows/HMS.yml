@@ -38,7 +38,7 @@ jobs:
       run: chrome --version && chromedriver --version
 
     - name: Run Selenium BDD Tests with Maven
-      run: mvn -B clean test 
+      run: mvn clean test 
 
     - name: Upload Cucumber Report
       if: success() || failure()
