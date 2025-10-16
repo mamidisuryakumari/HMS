@@ -12,8 +12,8 @@ public class AdminDashboardPage extends BasePage {
         this.context = context;
     }
 
-    private By doctorMenu = By.xpath("//span[text()=' Doctors ']");
-    private By addDoctorMenu = By.xpath("//span[text()='  Add Doctor']");
+    private By doctorMenu = By.xpath("//span[normalize-space(text())='Doctors']");
+    private By addDoctorMenu = By.xpath("//span[normalize-space(text())='Add Doctor']");
 
     public String getAdminDashBoardPageTitle() {
         return context.getBot().getTitle();
