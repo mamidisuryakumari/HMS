@@ -37,6 +37,8 @@ public class AddDoctorPage extends BasePage {
                 .enterText(doctorPasswordTextFld, doctorPassword)
                 .enterText(doctorConfirmPasswordFld, doctorPassword)
                 .click(submitBtn);
+        context.setDoctorEmail(doctorEmailId);
+        context.setDoctorPassword(doctorPassword);
         return this;
     }
 
@@ -44,6 +46,7 @@ public class AddDoctorPage extends BasePage {
         String addDoctorSuccessMsg = context.getBot().getAlertMessage();
         context.setAddDoctorAlertSuccessMsg(addDoctorSuccessMsg);
         context.getBot().acceptAlert();
+        context.getDriver().get("http://localhost/hospital/hms/doctor/");
         return this;
     }
 }

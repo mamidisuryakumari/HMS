@@ -39,16 +39,27 @@ public class DoctorLoginPageSteps {
     }
 
     @When("I login with doctor valid credentials")
-    public void iLoginWithDoctorValidCredentials(DataTable dataTable){
-       try{
-           Map<String, String> doctorLoginDetails = dataTable.asMap();
-           doctorLoginPage.doctorLogin(doctorLoginDetails.get("EmailId"),
-                   doctorLoginDetails.get("Password"));
-           log.info("Entered doctor login details successfully");
-       } catch (Exception e) {
-           log.error("An exception error occurred while entering the doctor login details");
-           throw new RuntimeException(e);
-       }
+    public void iLoginWithDoctorValidCredentials(DataTable dataTable) {
+        try {
+            Map<String, String> doctorLoginDetails = dataTable.asMap();
+            doctorLoginPage.doctorLogin(doctorLoginDetails.get("EmailId"),
+                    doctorLoginDetails.get("Password"));
+            log.info("Entered doctor login details successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while entering the doctor login details");
+            throw new RuntimeException(e);
+        }
+    }
+
+    @When("I login with doctor emailId and password")
+    public void iLoginWithDoctorEmailIDAndPassword() {
+        try {
+            doctorLoginPage.doctorLogin(context.getDoctorEmail(), context.getDoctorPassword());
+            log.info("Doctor logged in successfully");
+        } catch (Exception e) {
+            log.error("Failed to login");
+            throw e;
+        }
     }
 
 }

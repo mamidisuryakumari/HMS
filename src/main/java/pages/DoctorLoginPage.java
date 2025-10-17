@@ -22,6 +22,7 @@ public class DoctorLoginPage extends BasePage {
         context.getBot().enterText(userNameTextFld,userName)
                 .enterText(passwordTextFld,password)
                 .click(submitBtn);
+
         return new DoctorDashboardPage(context);
     }
 }
