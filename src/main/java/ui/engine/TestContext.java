@@ -14,6 +14,9 @@ public class TestContext {
     private String patientEmail;
     private String patientPassword;
 
+    private String doctorEmail;
+    private String doctorPassword;
+
     private String actualUserRegistrationSuccessMsg;
     private String actualPatientBookAppointmentSuccessMsg;
     private String patientAppointmentStatus;
