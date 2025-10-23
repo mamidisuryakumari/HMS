@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
 import pages.DoctorDashboardPage;
 import ui.engine.PropertiesManager;
@@ -30,6 +31,17 @@ public class DoctorDashBoardPageSteps {
             throw e;
         } catch (Exception e) {
             log.error("An exception error occurred while navigating to the doctor dashboard page title");
+            throw e;
+        }
+    }
+
+    @When("I navigate to the add patient page")
+    public void i_navigate_to_the_add_patient_page() {
+        try {
+            doctorDashboardPage.navigateToAddPatientPage();
+            log.info("Navigated to the add patient page successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while navigating to the add patient page");
             throw e;
         }
     }

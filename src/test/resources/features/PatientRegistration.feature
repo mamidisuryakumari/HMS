@@ -1,5 +1,6 @@
 Feature: Patient Registration functionality
 
+  @PatientRegistration
   Scenario: Verify that a patient can successfully register
     Given I am on the home page
     When I navigate to the login page

@@ -21,4 +21,5 @@ public class TestContext {
     private String actualPatientBookAppointmentSuccessMsg;
     private String patientAppointmentStatus;
     private String addDoctorAlertSuccessMsg;
+    private String addPatientAlertSuccessMsg;
 }
