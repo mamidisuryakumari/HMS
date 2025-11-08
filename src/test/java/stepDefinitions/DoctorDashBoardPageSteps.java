@@ -45,4 +45,26 @@ public class DoctorDashBoardPageSteps {
             throw e;
         }
     }
+
+    @When("I navigate to doctor manage patient page")
+    public void i_navigate_to_manage_patient_page() {
+        try {
+            doctorDashboardPage.navigateToDoctorManagePatientPage();
+            log.info("Navigated to the doctor manage patient page successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while navigating to the doctor manage patient page");
+            throw e;
+        }
+    }
+
+    @When("I navigate to the doctor appointment history page")
+    public void i_navigate_to_the_doctor_appointment_history_page() {
+        try {
+            doctorDashboardPage.navigateToDoctorAppointmentHistoryPage();
+            log.info("Navigate to appointment history page successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while navigating to the appointment history page");
+            throw e;
+        }
+    }
 }

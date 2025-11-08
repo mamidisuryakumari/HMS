@@ -46,7 +46,11 @@ public class AddDoctorPage extends BasePage {
         String addDoctorSuccessMsg = context.getBot().getAlertMessage();
         context.setAddDoctorAlertSuccessMsg(addDoctorSuccessMsg);
         context.getBot().acceptAlert();
-        context.getDriver().get("http://localhost/hospital/hms/doctor/");
         return this;
+    }
+
+    public DoctorLoginPage navigateToDoctorLoginPage(){
+        context.getDriver().get("http://localhost/hospital/hms/doctor/");
+        return new DoctorLoginPage(context);
     }
 }

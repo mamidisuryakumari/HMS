@@ -37,11 +37,11 @@ public class AddPatientPage extends BasePage {
         return this;
     }
 
-    public ManagePatientPage getAddPatientSuccessMsg(){
+    public DoctorManagePatientPage getAddPatientSuccessMsg(){
        String addPatientSuccessMsg =  context.getBot().getAlertMessage();
         context.setAddPatientAlertSuccessMsg(addPatientSuccessMsg);
         context.getBot().acceptAlert();
-        return new ManagePatientPage(context);
+        return new DoctorManagePatientPage(context);
     }
 
 }

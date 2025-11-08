@@ -17,9 +17,12 @@ public class TestContext {
     private String doctorEmail;
     private String doctorPassword;
 
+    private String managePatientPageTitle;
+
     private String actualUserRegistrationSuccessMsg;
     private String actualPatientBookAppointmentSuccessMsg;
     private String patientAppointmentStatus;
     private String addDoctorAlertSuccessMsg;
     private String addPatientAlertSuccessMsg;
+    private String addPatientMedicalSuccessMsg;
 }

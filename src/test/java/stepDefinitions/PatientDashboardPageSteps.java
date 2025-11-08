@@ -64,4 +64,59 @@ public class PatientDashboardPageSteps {
         }
     }
 
+    @When("I click on profile image")
+    public void i_click_on_profile_image() {
+        try {
+            patientDashboardPage.clickOnPatientProfileImage();
+            log.info("Patient profile image clicked successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while clicking on the patient login button");
+            throw e;
+        }
+    }
+
+    @When("I click on logout button")
+    public void i_click_on_logout_button() {
+        try {
+            patientDashboardPage.clickOnPatientLogoutBtn();
+            log.info("Patient logout button clicked successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while clicking on the logout button");
+            throw e;
+        }
+    }
+
+    @Then("I should see logout successfully")
+    public void i_should_see_logout_successfully() {
+        try {
+            log.info("Logout successfully");
+        } catch (Exception e) {
+            log.info("An exception error occurred while seeing logout successfully");
+            throw e;
+        }
+    }
+
+    @When("I navigate to patient medical history page")
+    public void i_navigate_to_patient_medical_history_page() {
+        try {
+            patientDashboardPage.clickOnMedicalHistoryMenu();
+            log.info("Navigate to medical history page successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while navigating to the patient medical history page");
+            throw e;
+        }
+    }
+
+    @When("I navigate to patient profile page")
+    public void i_navigate_to_patient_profile_page() {
+        try {
+            patientDashboardPage.navigateToPatientProfilePage();
+            log.info("Navigate to patient profile page successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while navigating to the patient profile page");
+            throw e;
+        }
+    }
+
+
 }

@@ -79,12 +79,24 @@ public class AddDoctorPageSteps {
             String actualAddDoctorAlertSuccessMsg = context.getAddDoctorAlertSuccessMsg();
             String expectedAddDoctorAlertSuccessMsg = exceptedSuccessMsg;
             assertEquals(expectedAddDoctorAlertSuccessMsg, actualAddDoctorAlertSuccessMsg);
+
             log.info("Add doctor success message is matched");
         } catch (AssertionError e) {
             log.error("Assertion failed while matching the doctor add success message");
             throw e;
         } catch (Exception e) {
             log.error("An exception error occurred while seeing the success message");
+            throw e;
+        }
+    }
+
+    @When("I navigate to the doctor login page")
+    public void iNavigateToTheDoctorLoginPage(){
+        try{
+            addDoctorPage.navigateToDoctorLoginPage();
+            log.info("Navigate to the doctor login page successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while navigating to the doctor login page");
             throw e;
         }
     }

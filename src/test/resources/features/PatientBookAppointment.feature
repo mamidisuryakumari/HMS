@@ -16,7 +16,7 @@ Feature: Patient book appointment and cancel appointment
     When I enter the appointment details
       | Doctor Specialization | Orthopedics  |
       | Doctor Name           | Vipin Tayagi |
-      | Date                  | 2025-10-15   |
+      | Date                  | 2025-11-15   |
       | Time                  | 1:15 PM      |
     Then I should see book appointment success message as Your appointment successfully booked
     When I navigate to the patient appointment history page

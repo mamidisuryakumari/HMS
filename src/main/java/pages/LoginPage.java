@@ -25,7 +25,7 @@ public class LoginPage extends BasePage {
     }
 
     public void navigateToPage(UserType user) {
-        String currentWindow = context.getDriver().getWindowHandle();
+
         switch (user) {
             case PATIENT:
                 context.getBot().click(patientLoginBtn);
@@ -44,13 +44,8 @@ public class LoginPage extends BasePage {
                 throw new IllegalArgumentException("I am unable to navigate to page");
 
         }
-        for (String handle : context.getDriver().getWindowHandles()) {
-            if (!handle.equals(currentWindow)) {
-                context.getDriver().switchTo().window(handle);
-                log.info("Switched to new window");
-                break;
-            }
-        }
+        context.getBot().switchToWindow();
+
     }
 
 }

@@ -10,6 +10,7 @@ import lombok.Getter;
 
 import java.io.File;
 import java.util.Random;
+import java.util.Set;
 
 @Slf4j
 public class Bot {
@@ -358,6 +359,30 @@ public class Bot {
             }
             lastHeight = newHeight;
         }
+    }
+
+    public Bot switchToWindow(){
+        String currentWindowHandle = driver.getWindowHandle();
+        for (String handle : driver.getWindowHandles()) {
+            if (!handle.equals(currentWindowHandle)) {
+                driver.switchTo().window(handle);
+                log.info("Switched to new window");
+                break;
+            }
+        }
+        return this;
+    }
+
+    public Bot switchToWindowByTitle(String expectedTitle) {
+        Set<String> allWindows = driver.getWindowHandles();
+        for (String handle : allWindows) {
+            driver.switchTo().window(handle);
+            if (driver.getTitle().contains(expectedTitle)) {
+                log.info("Switched to window with title: " + expectedTitle);
+            }
+        }
+        log.warn("No window found with title: " + expectedTitle);
+        return this;
     }
 
 
