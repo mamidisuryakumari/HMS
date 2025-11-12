@@ -1,5 +1,9 @@
 package stepDefinitions;
 
+import enums.UserType;
+import io.cucumber.java.en.Given;
+import pages.HomePage;
+import pages.LoginPage;
 import ui.engine.PropertiesManager;
 import ui.engine.TestContext;
 import io.cucumber.java.en.Then;
@@ -15,11 +19,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PatientLoginPageSteps {
 
     private TestContext context;
+    private HomePage homePage;
     private PatientLoginPage patientLoginPage;
+    private LoginPage loginPage;
 
     public PatientLoginPageSteps(TestContext context) {
         this.context = context;
+        this.homePage = new HomePage(context);
+        this.loginPage = new LoginPage(context);
         this.patientLoginPage = new PatientLoginPage(context);
+    }
+
+    @Given("The user is on \"Patient login page\"")
+    public void the_user_is_on() {
+        try {
+            homePage.navigateToLoginPage();
+            loginPage.navigateToPage(UserType.PATIENT);
+            log.info("The user is successfully navigated to the patient login page");
+        } catch (Exception e) {
+            log.error("An exception error occurred while navigating to the patient login page");
+            throw e;
+        }
     }
 
     @Then("I should see the patient login page")
@@ -76,7 +96,7 @@ public class PatientLoginPageSteps {
     @Then("I should see error message {string}")
     public void i_should_see_error_message(String expectedMessage) {
         try {
-            String actualMsgText ;
+            String actualMsgText;
 
             if (expectedMessage.contains("Please fill out")) {
                 actualMsgText = patientLoginPage.getEmailFormatErrorMsg();
@@ -86,9 +106,9 @@ public class PatientLoginPageSteps {
                 actualMsgText = patientLoginPage.getEmailFormatErrorMsg();
                 assertEquals(expectedMessage, actualMsgText, "Actual and Expected error message are not matched");
                 log.info(actualMsgText);
-            }else if(expectedMessage.contains("Invalid username")){
-              actualMsgText = String.valueOf(patientLoginPage.getErrorMsg());
-              assertEquals(expectedMessage, actualMsgText);
+            } else if (expectedMessage.contains("Invalid username")) {
+                actualMsgText = String.valueOf(patientLoginPage.getErrorMsg());
+                assertEquals(expectedMessage, actualMsgText);
             }
         } catch (Exception e) {
             log.error("An exception error occurred while matching the error message");

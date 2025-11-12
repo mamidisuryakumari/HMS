@@ -1,5 +1,9 @@
 package stepDefinitions;
 
+import enums.UserType;
+import io.cucumber.java.en.Given;
+import pages.HomePage;
+import pages.LoginPage;
 import ui.engine.Common;
 import ui.engine.PropertiesManager;
 import ui.engine.TestContext;
@@ -17,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PatientRegistrationPageSteps {
 
     private TestContext context;
+    private HomePage homePage;
+    private LoginPage loginPage;
     private PatientLoginPage patientLoginPage;
     private PatientRegistrationPage patientRegistrationPage;
 
@@ -24,6 +30,15 @@ public class PatientRegistrationPageSteps {
         this.context = context;
         this.patientLoginPage = new PatientLoginPage(context);
         this.patientRegistrationPage = new PatientRegistrationPage(context);
+        this.homePage = new HomePage(context);
+        this.loginPage = new LoginPage(context);
+    }
+
+    @Given("the user is on \"Registration\" page")
+    public void userIsOnRegistrationPage() {
+        homePage.navigateToLoginPage();
+        loginPage.navigateToPage(UserType.PATIENT);
+        patientLoginPage.navigateToThePatientRegistrationPage();
     }
 
     @Then("I should see the patient registration page")
@@ -42,7 +57,7 @@ public class PatientRegistrationPageSteps {
         }
     }
 
-    @When("I enter the following patient details")
+    @When("I enter the following patient valid details")
     public void i_enter_the_following_patient_details(io.cucumber.datatable.DataTable dataTable) {
         try {
             Map<String, String> patientRegistrationDetails = dataTable.asMap();
@@ -82,6 +97,46 @@ public class PatientRegistrationPageSteps {
         } catch (Exception e) {
             log.error("An exception error occurred while login with email and password");
             throw e;
+        }
+    }
+
+    @When("I enter the following patient invalid details")
+    public void i_enter_the_following_patient_invalid_details(io.cucumber.datatable.DataTable dataTable) {
+        try {
+            Map<String, String> patientInvalidDetails = dataTable.asMap();
+            patientRegistrationPage.userRegistration(patientInvalidDetails.get("FullName"),
+                    patientInvalidDetails.get("Address"),
+                    patientInvalidDetails.get("City"),
+                    patientInvalidDetails.get("Email").replace("${random}",Common.random()),
+                    patientInvalidDetails.get("Password"),
+                    patientInvalidDetails.get("Confirm Password"));
+            log.info("Patient invalid registration details entered successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while entering patient invalid details");
+            throw e;
+        }
+    }
+
+    @Then("I should an error message as {}")
+    public void i_should_an_error_message_as(String expectedMsg) {
+        String actualErrorMsg;
+        try {
+            if (expectedMsg.contains("Please fill out")) {
+                actualErrorMsg = patientRegistrationPage.getFullNameErrorMsg();
+                assertEquals(expectedMsg, actualErrorMsg);
+            }else if (expectedMsg.contains("Please include an '@' in the email address.")) {
+                actualErrorMsg = String.valueOf(patientRegistrationPage.getEmailFormatErrorMsg());
+                assertEquals(expectedMsg, actualErrorMsg);
+
+            }else if (expectedMsg.contains("Password and Confirm Password Field do not match  !! ")) {
+                actualErrorMsg = patientRegistrationPage.getAlertErrorMsg();
+                assertEquals(expectedMsg, actualErrorMsg);
+            }else if (expectedMsg.contains("'.' is used at a wrong position in '.com'.")) {
+                actualErrorMsg = patientRegistrationPage.getFullNameErrorMsg();
+                assertEquals(expectedMsg, actualErrorMsg);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

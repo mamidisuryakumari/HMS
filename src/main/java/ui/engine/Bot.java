@@ -70,9 +70,13 @@ public class Bot {
             new Actions(driver).moveToElement(element).perform();
             element.click();
             element.clear();
-            element.sendKeys(inputText);
-            //  element.sendKeys();
-            log.info("Entered text '{}' into element: {} ", inputText, locator);
+            if (inputText != null && !inputText.trim().isEmpty()) {
+                element.sendKeys(inputText);
+                log.info("Entered text '{}' into element: {}", inputText, locator);
+            } else {
+                log.warn("Skipped entering text for {} because inputText is null or empty", locator);
+            }
+
         } catch (Exception e) {
             log.error("Failed to enter text '{}' in element: {}", inputText, locator, e);
             throw new RuntimeException("An exception occurred while entering text in element: " + locator, e);

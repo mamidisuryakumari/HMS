@@ -18,6 +18,7 @@ public class PatientDashBoardPage extends BasePage {
     private By patientLogoutBtn = By.xpath("//a[normalize-space(text())='Log Out']");
     private By medicalHistoryMenu = By.xpath("//span[text()=' Medical History ']");
     private By patientMyProfileLink = By.xpath("//a[normalize-space(text())='My Profile']");
+    private By patientChangePasswordLink = By.xpath("//a[normalize-space(text())='Change Password']");
 
 
     public String getPatientDashBoardPageTitle() {
@@ -55,6 +56,10 @@ public class PatientDashBoardPage extends BasePage {
         return new PatientProfilePage(context);
     }
 
+    public PatientChangePasswordPage navigateToPatientChangePasswordPage() {
+        context.getBot().click(patientProfileImage).click(patientChangePasswordLink);
+        return new PatientChangePasswordPage(context);
+    }
 
 
 }

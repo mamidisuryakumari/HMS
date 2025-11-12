@@ -1,6 +1,9 @@
 package pages;
 
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import ui.engine.BasePage;
+import ui.engine.Bot;
 import ui.engine.TestContext;
 import org.openqa.selenium.By;
 
@@ -28,8 +31,9 @@ public class PatientRegistrationPage extends BasePage {
 
     public PatientDashBoardPage userRegistration(String fullName, String address, String city, String emailId, String password,
                                                  String againPassword) {
-        context.getBot().enterText(fullNameTextFld, fullName)
-                .enterText(addressTextFld, address)
+        context.getBot().enterText(fullNameTextFld, fullName);
+        context.getBot().pressTabUsingActions(addressTextFld);
+                context.getBot().enterText(addressTextFld, address)
                 .enterText(cityTextFld, city)
                 .jsClick(maleRadioBtn)
                 .enterText(emailTextFld, emailId)
@@ -47,5 +51,20 @@ public class PatientRegistrationPage extends BasePage {
         context.getBot().acceptAlert();
         context.getDriver().get("http://localhost/hospital/hms/user-login.php");
         return this;
+    }
+
+    public String getFullNameErrorMsg() {
+        context.getBot().click(submitBtn);
+        return context.getBot().getValidationMessage(fullNameTextFld);
+
+    }
+
+    public Bot getEmailFormatErrorMsg() {
+        context.getBot().click(submitBtn);
+        return context.getBot().click(emailTextFld);
+    }
+
+    public String getAlertErrorMsg() {
+        return context.getBot().getAlertMessage();
     }
 }

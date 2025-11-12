@@ -1,13 +1,13 @@
 package stepDefinitions;
 
+import enums.UserType;
+import io.cucumber.java.en.Given;
+import pages.*;
 import ui.engine.PropertiesManager;
 import ui.engine.TestContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
-import pages.PatientAppointmentHistoryPage;
-import pages.PatientBookAppointmentPage;
-import pages.PatientDashBoardPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,15 +15,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PatientDashboardPageSteps {
 
     private TestContext context;
+    private HomePage homePage;
+    private LoginPage loginPage;
+    private PatientLoginPage patientLoginPage;
     private PatientDashBoardPage patientDashboardPage;
     private PatientBookAppointmentPage patientBookAppointmentPage;
     private PatientAppointmentHistoryPage patientAppointmentHistoryPage;
 
+
     public PatientDashboardPageSteps(TestContext context) {
         this.context = context;
+        this.homePage = new HomePage(context);
+        this.loginPage = new LoginPage(context);
+        this.patientLoginPage = new PatientLoginPage(context);
         this.patientDashboardPage = new PatientDashBoardPage(context);
         this.patientBookAppointmentPage = new PatientBookAppointmentPage(context);
         this.patientAppointmentHistoryPage = new PatientAppointmentHistoryPage(context);
+
+    }
+
+    @Given("The patient is on the patient dashboard page")
+    public void thePatientIsOnThePatientDashboardPage(String userName, String password) {
+        try {
+            homePage.navigateToLoginPage();
+            loginPage.navigateToPage(UserType.PATIENT);
+
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Then("I should be navigated to the patient dashboard page")
@@ -118,5 +137,15 @@ public class PatientDashboardPageSteps {
         }
     }
 
+    @When("I navigate to patient change password page")
+    public void i_navigate_to_patient_change_password_page() {
+        try {
+            patientDashboardPage.navigateToPatientChangePasswordPage();
+            log.info("Navigate to patient change password page successfully");
+        } catch (Exception e) {
+            log.error("An exception error occurred while navigating to the patient change password page");
+            throw e;
+        }
+    }
 
 }
