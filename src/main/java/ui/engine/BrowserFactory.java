@@ -32,7 +32,7 @@ public class BrowserFactory {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
-                //	chromeOptions.addArguments("--headless=new");
+                	chromeOptions.addArguments("--headless=new");
                 chromeOptions.addArguments("--incognito", "--start-maximized");
                 chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
                 driver = new ChromeDriver(chromeOptions);

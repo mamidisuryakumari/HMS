@@ -17,22 +17,22 @@ Feature: Patient Registration functionality
   @Error-case
   Scenario Outline: Patient registration with invalid details
     When I enter the following patient invalid details
-      | FullName         | <fullName>        |
-      | Address          | <address>         |
-      | City             | <city>            |
-      | Email            | <email>           |
-      | Password         | <password>        |
-      | Confirm Password | <confirmPassword> |
+      | FullName        | <fullName>        |
+      | Address         | <address>         |
+      | City            | <city>            |
+      | Email           | <email>           |
+      | Password        | <password>        |
+      | ConfirmPassword | <confirmPassword> |
     Then I should an error message as <errorMessage>
     Examples:
-      | fullName | address     | city     | email                     | password | confirmPassword | errorMessage                                                                    |
-      |          | 123 Main St | New York | john${random}@example.com | Pass123! | Pass123!        | Please fill out this field.                                                     |
-      | John Doe |             | New York | john${random}@example.com | Pass123! | Pass123!        | Please fill out this field.                                                     |
-      | John Doe | 123 Main St |          | john${random}@example.com | Pass123! | Pass123!        | Please fill out this field.                                                     |
-      | John Doe | 123 Main St | New York | johnexample.com           | Pass123! | Pass123!        | Please include an '@' in the email address. 'johnexample.com' is missing an '@' |
-      | John Doe | 123 Main St | New York | john${random}@example.com | Pass123! | Pass321!        | Password and Confirm Password Field do not match  !!                            |
-      | John Doe | 123 Main St | New York | john@.com                 | Pass123! | Pass123!        | '.' is used at a wrong position in '.com'.                                      |
-      | John Doe | 123 Main St | New York | john${random}@example.com |          |                 | Please fill out this field.                                                     |
+      | fullName | address     | city     | email                     | password | confirmPassword | errorMessage                                                                     |
+      |          | 123 Main St | New York | john${random}@example.com | Pass123! | Pass123!        | Please fill out this field.                                                      |
+      | John Doe |             | New York | john${random}@example.com | Pass123! | Pass123!        | Please fill out this field.                                                      |
+      | John Doe | 123 Main St |          | john${random}@example.com | Pass123! | Pass123!        | Please fill out this field.                                                      |
+      | John Doe | 123 Main St | New York | johnexample.com           | Pass123! | Pass123!        | Please include an '@' in the email address. 'johnexample.com' is missing an '@'. |
+      | John Doe | 123 Main St | New York | john${random}@example.com | Pass123! | Pass321!        | Password and Confirm Password Field do not match  !!                             |
+      | John Doe | 123 Main St | New York | john@.com                 | Pass123! | Pass123!        | '.' is used at a wrong position in '.com'.                                       |
+      | John Doe | 123 Main St | New York | john${random}@example.com |          |                 | Please fill out this field.                                                      |
 
 
 

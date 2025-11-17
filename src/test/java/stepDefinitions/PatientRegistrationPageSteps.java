@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import enums.UserType;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import pages.HomePage;
 import pages.LoginPage;
@@ -58,7 +59,7 @@ public class PatientRegistrationPageSteps {
     }
 
     @When("I enter the following patient valid details")
-    public void i_enter_the_following_patient_details(io.cucumber.datatable.DataTable dataTable) {
+    public void i_enter_the_following_patient_details(DataTable dataTable) {
         try {
             Map<String, String> patientRegistrationDetails = dataTable.asMap();
             patientRegistrationPage.userRegistration(patientRegistrationDetails.get("Full Name").replace("${random}", Common.random()),
@@ -101,15 +102,18 @@ public class PatientRegistrationPageSteps {
     }
 
     @When("I enter the following patient invalid details")
-    public void i_enter_the_following_patient_invalid_details(io.cucumber.datatable.DataTable dataTable) {
+    public void i_enter_the_following_patient_invalid_details(DataTable dataTable) {
+
         try {
-            Map<String, String> patientInvalidDetails = dataTable.asMap();
-            patientRegistrationPage.userRegistration(patientInvalidDetails.get("FullName"),
-                    patientInvalidDetails.get("Address"),
-                    patientInvalidDetails.get("City"),
-                    patientInvalidDetails.get("Email").replace("${random}",Common.random()),
-                    patientInvalidDetails.get("Password"),
-                    patientInvalidDetails.get("Confirm Password"));
+            var patientInvalidDetails = dataTable.asMap();
+            String fullName = patientInvalidDetails.get("FullName");
+            String address = patientInvalidDetails.get("Address");
+            String city = patientInvalidDetails.get("City");
+            String email = patientInvalidDetails.get("Email").replace("${random}", Common.random());
+            String password = patientInvalidDetails.get("Password");
+            String confirmPassword = patientInvalidDetails.get("ConfirmPassword");
+            patientRegistrationPage.userRegistration(fullName,
+                    address, city, email, password, confirmPassword);
             log.info("Patient invalid registration details entered successfully");
         } catch (Exception e) {
             log.error("An exception error occurred while entering patient invalid details");
@@ -119,25 +123,24 @@ public class PatientRegistrationPageSteps {
 
     @Then("I should an error message as {}")
     public void i_should_an_error_message_as(String expectedMsg) {
-        String actualErrorMsg;
-        try {
-            if (expectedMsg.contains("Please fill out")) {
-                actualErrorMsg = patientRegistrationPage.getFullNameErrorMsg();
-                assertEquals(expectedMsg, actualErrorMsg);
-            }else if (expectedMsg.contains("Please include an '@' in the email address.")) {
-                actualErrorMsg = String.valueOf(patientRegistrationPage.getEmailFormatErrorMsg());
-                assertEquals(expectedMsg, actualErrorMsg);
 
-            }else if (expectedMsg.contains("Password and Confirm Password Field do not match  !! ")) {
+        try {
+            String fieldName = context.getFieldName();
+            String actualErrorMsg;
+            if (fieldName != null) {
+                actualErrorMsg = patientRegistrationPage.getActualErrorMessageAtFields(fieldName);
+            }else if (patientRegistrationPage.isAlertPresent()) {
                 actualErrorMsg = patientRegistrationPage.getAlertErrorMsg();
-                assertEquals(expectedMsg, actualErrorMsg);
-            }else if (expectedMsg.contains("'.' is used at a wrong position in '.com'.")) {
-                actualErrorMsg = patientRegistrationPage.getFullNameErrorMsg();
-                assertEquals(expectedMsg, actualErrorMsg);
+            } else {
+              actualErrorMsg = patientRegistrationPage.getEmailFormatErrorMsg();
             }
+            assertEquals(expectedMsg, actualErrorMsg, "Actual and expected results are not matched");
+            log.info("Actual and expected error message is matched");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error("An exception error occurred while seeing the error message");
+            throw e;
         }
+
     }
 
 

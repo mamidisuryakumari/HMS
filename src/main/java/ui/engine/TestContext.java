@@ -25,4 +25,5 @@ public class TestContext {
     private String addDoctorAlertSuccessMsg;
     private String addPatientAlertSuccessMsg;
     private String addPatientMedicalSuccessMsg;
+    private String fieldName;
 }

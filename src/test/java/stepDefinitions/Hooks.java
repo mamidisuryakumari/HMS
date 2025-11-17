@@ -45,10 +45,10 @@ public class Hooks {
     @After
     public void tearDown() {
         WebDriver driver = context.getDriver();
-//	if (driver != null) {
-//			driver.quit();
-//
-//}
+	if (driver != null) {
+			driver.quit();
+
+}
 
         //	ReportManager.flush();
     }
